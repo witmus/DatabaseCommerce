@@ -1,0 +1,16 @@
+USE [zbd];
+GO;
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE OR ALTER PROCEDURE sp_DeleteProduct 
+	@id int = 0
+AS
+BEGIN
+  DELETE FROM dbo.CurrentProducts
+  WHERE id = @id;
+END
+GO

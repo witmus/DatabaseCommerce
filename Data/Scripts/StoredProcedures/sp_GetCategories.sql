@@ -1,0 +1,19 @@
+USE [zbd]
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE OR ALTER PROCEDURE [dbo].[sp_GetCategories]
+AS
+BEGIN
+  SELECT * From Categories;
+END
+
+
+
+	
+
+
