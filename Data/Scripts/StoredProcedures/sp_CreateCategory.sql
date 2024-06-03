@@ -11,6 +11,7 @@ CREATE OR ALTER PROCEDURE sp_CreateCategory
 	@vatRate decimal(6,2)
 AS
 BEGIN
+	-- check if category name is taken
 	IF @name IN (select Name from Categories)
 		BEGIN
 			RAISERROR(50005,11,1);

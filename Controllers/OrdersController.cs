@@ -22,7 +22,7 @@ namespace DatabaseCommerce.Controllers
             return Ok(result);
         }
 
-        [HttpPost]
+        [HttpPost("SubmitOrder")]
         public async Task<IActionResult> SubmitOrderAsync(SubmitOrderCommand command)
         {
             using var db = new ApplicationDbContext();
@@ -33,7 +33,7 @@ namespace DatabaseCommerce.Controllers
                     .SqlQuery<string>("EXEC [dbo].[sp_GetLastOrderNumber]")
                     .FirstOrDefaultAsync();
 
-                var newNumber = int.Parse(currentNumber.Substring(1));
+                var newNumber = $"F{int.Parse(currentNumber.Substring(2)) + 1}";
 
                 var result = await db.Database
                     .ExecuteSqlCommandAsync(

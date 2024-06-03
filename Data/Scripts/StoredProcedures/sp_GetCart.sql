@@ -12,8 +12,8 @@ AS
 BEGIN
   SELECT c.Amount, c.CurrentProductId, cp.NetPrice,
 		 cp.NetPrice * c.Amount as NetTotal,
-		 cp.NetPrice * c.Amount * ((100 + cat.VatRate) / 100) as GrossTotal,
-		 cp.NetPrice * ((100 + cat.VatRate) / 100) as GrossPrice,
+		 ROUND(cp.NetPrice * c.Amount * ((100 + cat.VatRate) / 100), 2) as GrossTotal,
+		 ROUND(cp.NetPrice * ((100 + cat.VatRate) / 100), 2) as GrossPrice,
 		 cp.Name as ProductName, cp.CategoryName
   FROM CartProducts as c
   JOIN CurrentProducts as cp

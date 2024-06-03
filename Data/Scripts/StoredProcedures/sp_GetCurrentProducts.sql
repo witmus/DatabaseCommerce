@@ -9,10 +9,10 @@ GO
 CREATE OR ALTER PROCEDURE [dbo].[sp_GetCurrentProducts]
 AS
 BEGIN
-  SELECT cp.Id, cp.Name, cp.NetPrice, cp.CategoryName, cp.IsDiscount,
-		 c.VatRate, cp.NetPrice * ((100 + c.VatRate) / 100) as GrossPrice,
-		 hp.netprice as NetLowest, hp.netprice * ((100 + hp.VatRate) / 100) as GrossLowest
-  FROM CurrentProducts as cp
+	SELECT cp.Id, cp.Name, cp.NetPrice, cp.CategoryName, cp.IsDiscount, c.VatRate,
+		   cp.NetPrice * ((100 + c.VatRate) / 100) as GrossPrice,
+		   hp.netprice as NetLowest, hp.netprice * ((100 + hp.VatRate) / 100) as GrossLowest
+	FROM CurrentProducts as cp
 	LEFT JOIN Categories as c
 	ON cp.CategoryName = c.Name
 	OUTER APPLY

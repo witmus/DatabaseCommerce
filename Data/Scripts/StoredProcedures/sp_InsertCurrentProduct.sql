@@ -13,6 +13,7 @@ CREATE OR ALTER PROCEDURE sp_InsertCurrentProduct
 	@categoryName varchar(63)
 AS
 BEGIN
+	-- check if category name is valid
 	IF @categoryName NOT IN (select Name from Categories)
 		BEGIN
 			RAISERROR(50001,11,1);
