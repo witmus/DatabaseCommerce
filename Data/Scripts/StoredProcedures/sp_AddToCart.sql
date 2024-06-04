@@ -1,6 +1,3 @@
-USE zbd
-GO
-
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -34,11 +31,11 @@ BEGIN
 		END
 
 	-- if product is already in cart update amount, if not create cart position
-	IF EXISTS (select 1 from CartProducts where UserId = @userId and CurrentProductId = @productId)
+	IF EXISTS (select 1 from ProductsInCart where UserId = @userId and CurrentProductId = @productId)
 		EXEC sp_ChangeCartItemAmount @userId, @productId, @amount;
 	ELSE
 		INSERT INTO 
-		CartProducts(UserId, CurrentProductId, Amount)
+		ProductsInCart(UserId, CurrentProductId, Amount)
 		values (@userId, @productId, @amount);
 END
 GO

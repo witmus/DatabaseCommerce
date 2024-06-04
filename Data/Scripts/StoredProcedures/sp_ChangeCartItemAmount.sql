@@ -1,6 +1,3 @@
-USE zbd
-GO
-
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -12,7 +9,7 @@ CREATE OR ALTER PROCEDURE sp_ChangeCartItemAmount
 	@amount int
 AS
 BEGIN
-	UPDATE CartProducts
+	UPDATE ProductsInCart
 	SET Amount = @amount
 	WHERE UserId = @userId and CurrentProductId = @productId;	
 END

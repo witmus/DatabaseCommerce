@@ -59,7 +59,7 @@ namespace DatabaseCommerce.Controllers
             {
                 var result = await db.Database
                     .ExecuteSqlCommandAsync(
-                        @"EXEC [dbo].[sp_RemoveFromCart] @p0, @p1, @p2", command.UserId, command.ProductId, command.Amount);
+                        @"EXEC [dbo].[sp_ChangeCartItemAmount] @p0, @p1, @p2", command.UserId, command.ProductId, command.Amount);
 
                 return Ok(result);
             }
@@ -78,7 +78,7 @@ namespace DatabaseCommerce.Controllers
             {
                 var result = await db.Database
                     .ExecuteSqlCommandAsync(
-                        @"EXEC [dbo].[sp_RemoveFromCart] @p0", userId, productId);
+                        @"EXEC [dbo].[sp_RemoveFromCart] @p0, @p1", userId, productId);
 
                 return Ok(result);
             }

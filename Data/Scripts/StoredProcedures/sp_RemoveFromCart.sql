@@ -1,6 +1,3 @@
-USE [zbd];
-GO
-
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -11,7 +8,7 @@ CREATE OR ALTER PROCEDURE sp_RemoveFromCart
 	@productId int
 AS
 BEGIN
-  DELETE FROM dbo.CartProducts
+  DELETE FROM dbo.ProductsInCart
   WHERE UserId = @userId and CurrentProductId = @productId
 END
 GO

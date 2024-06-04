@@ -1,9 +1,12 @@
+use zbd_prod;
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE OR ALTER PROCEDURE [dbo].[sp_GetCurrentProducts]
+CREATE OR ALTER PROCEDURE [dbo].[sp_GetCurrentProductsByCategoryName]
+	@categoryName varchar(100)
 AS
 BEGIN
 	SELECT cp.Id, cp.Name, cp.NetPrice, cp.CategoryName, cp.IsDiscount, c.VatRate,
@@ -21,4 +24,5 @@ BEGIN
 		AND CreatedTimestamp > CURRENT_TIMESTAMP - 30
 		ORDER BY NetPrice
 	) hp
+	WHERE cp.CategoryName = @categoryName;
 END

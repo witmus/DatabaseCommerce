@@ -25,7 +25,7 @@ namespace DatabaseCommerce.Controllers
 
                 return Ok(result);
             }
-            catch(SqlException ex)
+            catch (SqlException ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -38,6 +38,18 @@ namespace DatabaseCommerce.Controllers
 
             var result = await db.Database
                 .SqlQuery<CurrentProductDto>("EXEC [dbo].[sp_GetCurrentProducts]")
+                .ToListAsync();
+
+            return Ok(result);
+        }
+
+        [HttpGet("{categoryName}")]
+        public async Task<IActionResult> GetProductsByCategoryName(string categoryName)
+        {
+            using var db = new ApplicationDbContext();
+
+            var result = await db.Database
+                .SqlQuery<CurrentProductDto>("EXEC [dbo].[sp_GetCurrentProductsByCategoryName] @p0", categoryName)
                 .ToListAsync();
 
             return Ok(result);
@@ -72,7 +84,7 @@ namespace DatabaseCommerce.Controllers
             try
             {
                 var result = await db.Database
-                    .ExecuteSqlCommandAsync("EXEC [dbo].[sp_UpdateCurrentProduct] @p0", id);
+                    .ExecuteSqlCommandAsync("EXEC [dbo].[sp_DeleteCurrentProduct] @p0", id);
 
                 return Ok(result);
             }

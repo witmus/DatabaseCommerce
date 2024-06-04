@@ -1,6 +1,3 @@
-USE [zbd]
-GO
-
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -15,7 +12,7 @@ BEGIN
 		 ROUND(cp.NetPrice * c.Amount * ((100 + cat.VatRate) / 100), 2) as GrossTotal,
 		 ROUND(cp.NetPrice * ((100 + cat.VatRate) / 100), 2) as GrossPrice,
 		 cp.Name as ProductName, cp.CategoryName
-  FROM CartProducts as c
+  FROM ProductsInCart as c
   JOIN CurrentProducts as cp
   ON cp.Id = c.CurrentProductId
   JOIN Categories as cat

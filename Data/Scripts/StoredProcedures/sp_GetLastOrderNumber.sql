@@ -1,6 +1,3 @@
-USE [zbd]
-GO
-
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -10,11 +7,6 @@ CREATE OR ALTER PROCEDURE [dbo].[sp_GetLastOrderNumber]
 AS
 BEGIN
   SELECT TOP 1 InvoiceNumber FROM Orders
-  ORDER BY IncomeDate DESC;
+  ORDER BY CAST(SUBSTRING(InvoiceNumber,2,20) AS INT) DESC
 END
-
-
-
-	
-
 

@@ -1,6 +1,3 @@
-USE [zbd]
-GO
-
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -16,7 +13,7 @@ BEGIN
 	ROUND(hp.NetPrice * po.Amount * hp.VatRate / 100, 2) as VatTotal,
 	ROUND(hp.NetPrice * po.Amount * (100 + hp.VatRate) / 100, 2) as GrossTotal
 	FROM Orders as o
-	JOIN ProductsOrders as po
+	JOIN ProductOrders as po
 	ON po.OrderInvoiceNumber = o.InvoiceNumber
 	JOIN HistoricProducts as hp
 	ON hp.Id = po.HistoricProductId

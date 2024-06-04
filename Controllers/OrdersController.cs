@@ -1,5 +1,6 @@
 ﻿using DatabaseCommerce.Commands;
 using DatabaseCommerce.Data;
+using DatabaseCommerce.Helpers;
 using DatabaseCommerce.Model.DTO;
 using Microsoft.AspNetCore.Mvc;
 using System.Data.SqlClient;
@@ -33,7 +34,7 @@ namespace DatabaseCommerce.Controllers
                     .SqlQuery<string>("EXEC [dbo].[sp_GetLastOrderNumber]")
                     .FirstOrDefaultAsync();
 
-                var newNumber = $"F{int.Parse(currentNumber.Substring(2)) + 1}";
+                var newNumber = $"F{int.Parse(currentNumber.Substring(1)) + 1}";
 
                 var result = await db.Database
                     .ExecuteSqlCommandAsync(
@@ -65,6 +66,8 @@ namespace DatabaseCommerce.Controllers
             result.OrderPositions = await db.Database
                 .SqlQuery<OrderProductDto>("EXEC [dbo].[sp_GetOrderPositions] @p0", invoiceNumber)
                 .ToListAsync();
+
+            DocumentGenerator.GenerateInvoice(result);
 
             return Ok(result);
         }

@@ -1,3 +1,5 @@
+USE zbd;
+
 DELETE FROM addresses;
 DELETE FROM ProductOrders;
 DELETE FROM orders;

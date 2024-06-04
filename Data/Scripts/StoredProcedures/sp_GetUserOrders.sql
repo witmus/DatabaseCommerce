@@ -1,5 +1,3 @@
-USE zbd;
-
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -12,7 +10,7 @@ BEGIN
   SELECT o.InvoiceNumber, o.IncomeDate,
   ROUND(SUM(hp.NetPrice * (100 + hp.VatRate) / 100 * po.Amount),2) as GrossTotal
   FROM Orders as o
-  JOIN ProductsOrders as po
+  JOIN ProductOrders as po
   ON po.OrderInvoiceNumber = o.InvoiceNumber
   JOIN HistoricProducts as hp
   ON hp.Id = po.HistoricProductId
