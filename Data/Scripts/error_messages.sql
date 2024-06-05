@@ -15,3 +15,9 @@ GO
 
 EXEC sys.sp_addmessage 50006,1,'cart_empty',@replace='replace'
 GO
+
+EXEC sys.sp_addmessage 50007,1,'email_taken',@replace='replace'
+GO
+
+EXEC sys.sp_addmessage 50008,1,'user_without_address',@replace='replace'
+GO
