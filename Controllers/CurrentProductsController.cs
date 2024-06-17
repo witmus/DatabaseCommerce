@@ -43,7 +43,31 @@ namespace DatabaseCommerce.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{categoryName}")]
+        [HttpGet("Page/{offset}/{pageSize}")]
+        public async Task<IActionResult> GetProductsPageAsync(int offset, int pageSize)
+        {
+            using var db = new ApplicationDbContext();
+
+            var result = await db.Database
+                .SqlQuery<CurrentProductDto>("EXEC [dbo].[sp_GetCurrentProductsPage] @p0, @p1", offset, pageSize)
+                .ToListAsync();
+
+            return Ok(result);
+        }
+
+        [HttpGet("{productName}")]
+        public async Task<IActionResult> GetProductsByName(string productName)
+        {
+            using var db = new ApplicationDbContext();
+
+            var result = await db.Database
+                .SqlQuery<CurrentProductDto>("EXEC [dbo].[sp_GetCurrentProductsByName] @p0", productName)
+                .ToListAsync();
+
+            return Ok(result);
+        }
+
+        [HttpGet("GetByCategoryName/{categoryName}")]
         public async Task<IActionResult> GetProductsByCategoryName(string categoryName)
         {
             using var db = new ApplicationDbContext();
